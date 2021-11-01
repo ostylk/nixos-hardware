@@ -2,8 +2,8 @@
   linux-surface = fetchFromGitHub {
     owner = "linux-surface";
     repo = "linux-surface";
-    rev = "bfd4fde34b46536dc2a184a536f9343733dff789";
-    sha256 = "sha256-VUye2tq9GeI0BFe1BCZ9HsqBPIi8Mq5YiCEWtbeOuMo=";
+    rev = "42f84a73a2774347bc3678677d7f71bf48b8a396";
+    sha256 = "bj6fEXleMfqHCIde0lALUzBb6qaqLCTTmwoSnU4Uh4U=";
   };
 
   ath10k-firmware = fetchFromGitHub {
