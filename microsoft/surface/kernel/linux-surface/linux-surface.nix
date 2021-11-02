@@ -19,7 +19,7 @@ buildLinux (args // rec {
     owner = "linux-surface";
     repo = "kernel";
     rev = "e716df100b78e2fb5018c5437286604b3a9dcdd2";
-    sha256 = lib.fakeSha256;
+    sha256 = "sha256-Ce86+Ggiky/GR1IRzoIqlkim28N8NktIK8nZMYDMFcM=";
   };
   #src = fetchurl {
   #  url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
