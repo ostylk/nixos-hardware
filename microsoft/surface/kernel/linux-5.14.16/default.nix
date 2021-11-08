@@ -4,33 +4,33 @@ let
   patches = repos.linux-surface + "/patches";
   surface_kernelPatches = [
     {
-      name = "microsoft-surface-patches-linux-5.14.15";
+      name = "microsoft-surface-patches-linux-5.14.16";
       patch = null;
-      structuredExtraConfig = with lib.kernel; {
+      extraConfig = ''
         #
         # Surface Aggregator Module
         #
-        SURFACE_AGGREGATOR = module;
-        SURFACE_AGGREGATOR_ERROR_INJECTION = no;
-        SURFACE_AGGREGATOR_BUS = yes;
-        SURFACE_AGGREGATOR_CDEV = module;
-        SURFACE_AGGREGATOR_REGISTRY = module;
+        CONFIG_SURFACE_AGGREGATOR m
+        CONFIG_SURFACE_AGGREGATOR_ERROR_INJECTION n
+        CONFIG_SURFACE_AGGREGATOR_BUS y
+        CONFIG_SURFACE_AGGREGATOR_CDEV m
+        CONFIG_SURFACE_AGGREGATOR_REGISTRY m
 
-        SURFACE_ACPI_NOTIFY = module;
-        SURFACE_DTX = module;
-        SURFACE_KIP_TABLET_SWITCH = module;
-        SURFACE_PLATFORM_PROFILE = module;
+        CONFIG_SURFACE_ACPI_NOTIFY m
+        CONFIG_SURFACE_DTX m
+        CONFIG_SURFACE_KIP_TABLET_SWITCH m
+        CONFIG_SURFACE_PLATFORM_PROFILE m
 
-        SURFACE_HID = module;
-        SURFACE_KBD = module;
+        CONFIG_SURFACE_HID m
+        CONFIG_SURFACE_KBD m
 
-        BATTERY_SURFACE = module;
-        CHARGER_SURFACE = module;
+        CONFIG_BATTERY_SURFACE m
+        CONFIG_CHARGER_SURFACE m
 
         #
         # Surface Hotplug
         #
-        SURFACE_HOTPLUG = module;
+        CONFIG_SURFACE_HOTPLUG m
 
         #
         # IPTS touchscreen
@@ -38,47 +38,39 @@ let
         # This only enables the user interface for IPTS data.
         # For the touchscreen to work, you need to install iptsd.
         #
-        MISC_IPTS = module;
+        CONFIG_MISC_IPTS m
 
         #
         # Cameras: IPU3
         #
-        VIDEO_IPU3_IMGU = module;
-        VIDEO_IPU3_CIO2 = module;
-        CIO2_BRIDGE = yes;
-        INTEL_SKL_INT3472 = module;
-        REGULATOR_TPS68470 = module;
-        COMMON_CLK_TPS68470 = module;
+        CONFIG_VIDEO_IPU3_IMGU m
+        CONFIG_VIDEO_IPU3_CIO2 m
+        CONFIG_CIO2_BRIDGE y
+        CONFIG_INTEL_SKL_INT3472 m
+        CONFIG_REGULATOR_TPS68470 m
+        CONFIG_COMMON_CLK_TPS68470 m
 
         #
         # Cameras: Sensor drivers
         #
-        VIDEO_OV5693 = module;
-        VIDEO_OV8865 = module;
+        CONFIG_VIDEO_OV5693 m
+        CONFIG_VIDEO_OV8865 m
 
         #
         # ALS Sensor for Surface Book 3, Surface Laptop 3, Surface Pro 7
         #
-        APDS9960 = module;
+        CONFIG_APDS9960 m
 
         #
         # Other Drivers
         #
-        INPUT_SOC_BUTTON_ARRAY = module;
-        SURFACE_3_BUTTON = module;
-        SURFACE_3_POWER_OPREGION = module;
-        SURFACE_PRO3_BUTTON = module;
-        SURFACE_GPE = module;
-        SURFACE_BOOK1_DGPU_SWITCH = module;
-
-        #
-        # Needed for reading battery data
-        #
-        SERIAL_DEV_BUS = yes;
-        SERIAL_DEV_CTRL_TTYPORT = yes;
-        MFD_INTEL_LPSS_PCI = yes;
-        INTEL_IDMA64 = yes;
-      };
+        CONFIG_INPUT_SOC_BUTTON_ARRAY m
+        CONFIG_SURFACE_3_BUTTON m
+        CONFIG_SURFACE_3_POWER_OPREGION m
+        CONFIG_SURFACE_PRO3_BUTTON m
+        CONFIG_SURFACE_GPE m
+        CONFIG_SURFACE_BOOK1_DGPU_SWITCH m
+      '';
     }
     {
       name = "ms-surface/0001-surface3-oemb";
@@ -116,16 +108,16 @@ let
       name = "ms-surface/0009-surface-typecover";
       patch = patches + "/5.14/0009-surface-typecover.patch";
     }
-    #{
-    #  name = "ms-surface/0010-cameras";
-    #  patch = patches + "/5.14/0010-cameras.patch";
-    #}
+    {
+      name = "ms-surface/0010-cameras";
+      patch = patches + "/5.14/0010-cameras.patch";
+    }
     {
       name = "ms-surface/0011-amd-gpio";
       patch = patches + "/5.14/0011-amd-gpio.patch";
     }
   ];
 in (with pkgs;
-  recurseIntoAttrs (linuxPackagesFor (callPackage ./linux-5.14.15.nix {
+  recurseIntoAttrs (linuxPackagesFor (callPackage ./linux-5.14.16.nix {
     kernelPatches = surface_kernelPatches;
   })))
