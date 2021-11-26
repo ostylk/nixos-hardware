@@ -43,8 +43,6 @@ let
         #
         # Cameras: IPU3
         #
-        VIDEO_IPU3_IMGU m
-        VIDEO_IPU3_CIO2 m
         CIO2_BRIDGE y
         INTEL_SKL_INT3472 m
         REGULATOR_TPS68470 m
