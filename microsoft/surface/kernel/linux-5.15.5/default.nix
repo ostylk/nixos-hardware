@@ -110,7 +110,8 @@ let
     }
     {
       name = "ms-surface/0010-cameras";
-      patch = patches + "/5.15/0010-cameras.patch";
+      #patch = patches + "/5.15/0010-cameras.patch";
+      patch = ./cameras.patch;
     }
     {
       name = "ms-surface/0011-amd-gpio";
