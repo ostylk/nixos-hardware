@@ -68,6 +68,14 @@ let
         SURFACE_PRO3_BUTTON m
         SURFACE_GPE m
         SURFACE_BOOK1_DGPU_SWITCH m
+
+        #
+        # Needed for reading battery data
+        #
+        SERIAL_DEV_BUS y
+        SERIAL_DEV_CTRL_TTYPORT y
+        MFD_INTEL_LPSS_PCI y
+        INTEL_IDMA64 y
       '';
     }
     {
